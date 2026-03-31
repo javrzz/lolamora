@@ -1,0 +1,19 @@
+{
+  "name": "Lola Mora — Escultora de la Patria",
+  "short_name": "Lola Mora",
+  "description": "Presentación interactiva sobre la escultora Lola Mora en el Museo Casa Histórica de la Independencia",
+  "start_url": "/lolamora/",
+  "scope": "/lolamora/",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#001f38",
+  "theme_color": "#001f38",
+  "icons": [
+    {
+      "src": "52607-A.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}
