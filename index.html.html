@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Lola Mora — Escultora de la Patria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ───── RESET & BASE ───── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --prussian: #003153;
+      --prussian-light: #004070;
+      --prussian-dark: #001f38;
+      --gold: #C9A96E;
+      --gold-light: #E8C98A;
+      --cream: #F5EDD8;
+      --white: #FFFFFF;
+      --ink: rgba(255,255,255,0.9);
+      --ink-muted: rgba(255,255,255,0.55);
+      --section-w: 100vw;
+      --section-h: 100vh;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: var(--prussian-dark);
+      color: var(--ink);
+      font-family: 'Lato', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+      cursor: default;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: pan-x;
+    }
+
+    /* ───── SCROLLABLE CONTAINER (horizontal) ───── */
+    #track {
+      display: flex;
+      flex-direction: row;
+      width: max-content;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    #track::-webkit-scrollbar { display: none; }
+
+    /* ───── SECTIONS ───── */
+    section {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ───── GLOBAL DECORATIVE ELEMENTS ───── */
+    .gold-line {
+      display: block;
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 1.2rem;
+    }
+    .gold-line-v {
+      display: block;
+      width: 2px;
+      height: 60px;
+      background: var(--gold);
+      margin: 0 auto 1.5rem;
+    }
+    .section-label {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .caption {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ───── NAV DOTS ───── */
+    #nav-dots {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.6rem;
+      z-index: 100;
+    }
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--ink-muted);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    /* ───── ARROW CONTROLS ───── */
+    .arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 50%;
+      background: rgba(0,31,56,0.7);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .arrow:hover { border-color: var(--gold); background: rgba(0,31,56,0.95); }
+    .arrow svg { width: 16px; height: 16px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    #arrow-prev { left: 1.2rem; }
+    #arrow-next { right: 1.2rem; }
+
+    /* ════════════════════════════════════════
+       SECTION 0 — PORTADA
+    ════════════════════════════════════════ */
+    #s0 {
+      background: var(--prussian-dark);
+    }
+    #s0 .bg-img {
+      position: absolute; inset: 0;
+      background: url('templete2.png') center/cover no-repeat;
+      opacity: 0.18;
+      filter: grayscale(30%);
+    }
+    #s0 .gradient-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(0,20,40,0.95) 0%, rgba(0,49,83,0.75) 60%, rgba(0,20,40,0.9) 100%);
+    }
+    #s0 .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 680px;
+      padding: 2rem;
+      animation: fadeUp 1.2s ease both;
+    }
+    #s0 .eyebrow {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 2rem;
+    }
+    #s0 h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 8vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.0;
+      color: var(--white);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.3rem;
+    }
+    #s0 h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    #s0 .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      font-style: italic;
+      color: var(--ink-muted);
+      margin: 1.2rem 0 2.5rem;
+    }
+    #s0 .dates {
+      font-family: 'Lato', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      margin-bottom: 3rem;
+    }
+    #s0 .scroll-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--ink-muted);
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+    }
+    #s0 .scroll-hint svg {
+      width: 18px; height: 18px;
+      stroke: var(--gold); fill: none; stroke-width: 1.5;
+      animation: bounceX 2s ease-in-out infinite;
+    }
+
+    /* ════════════════════════════════════════
+       SECTION 1 — RETRATO / BIO
+    ════════════════════════════════════════ */
+    #s1 {
+      background: var(--prussian);
+    }
+    #s1 .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s1 .photo-side {
+      position: relative;
+      overflow: hidden;
+    }
+    #s1 .photo-side img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      filter: sepia(20%) contrast(1.1);
+      transition: transform 8s ease;
+      background: #001628;
+    }
+    #s1:hover .photo-side img { transform: scale(1.04); }
+    #s1 .photo-side::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 60%, var(--prussian) 100%),
+                  linear-gradient(to top, rgba(0,20,40,0.5) 0%, transparent 50%);
+    }
+    #s1 .year-tag {
+      position: absolute;
+      bottom: 3rem; left: 2rem;
+      z-index: 3;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      user-select: none;
+    }
+    #s1 .text-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 4rem 2.5rem 2.5rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+    }
+    #s1 .text-side::-webkit-scrollbar { width: 4px; }
+    #s1 .text-side::-webkit-scrollbar-track { background: transparent; }
+    #s1 .text-side::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s1 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+      color: var(--white);
+    }
+    #s1 p em { font-style: italic; color: var(--gold-light); }
+    #s1 h2 em { font-style: italic; color: var(--gold-light); }
+    #s1 p {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    #s1 .fact-row {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(201,169,110,0.2);
+    }
+    .fact { display: flex; flex-direction: column; gap: 0.2rem; }
+    .fact-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .fact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+    }
+
+    /* ════════════════════════════════════════
+       SECTION 2 — CASA HISTÓRICA (Relieves)
+    ════════════════════════════════════════ */
+    #s2 {
+      background: var(--prussian-dark);
+    }
+    #s2 .bg-full {
+      position: absolute; inset: 0;
+      background: url('001.jpg') center/cover no-repeat;
+      filter: brightness(0.25) sepia(30%);
+    }
+    #s2 .panel {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #s2 .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      background: linear-gradient(to right, rgba(0,20,40,0.97) 0%, rgba(0,20,40,0.7) 100%);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+    }
+    #s2 .left::-webkit-scrollbar { width: 4px; }
+    #s2 .left::-webkit-scrollbar-track { background: transparent; }
+    #s2 .left::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s2 .right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 3rem 2rem 1.5rem;
+      gap: 1rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: none;
+    }
+    #s2 .right::-webkit-scrollbar { display: none; }
+    #s2 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    #s2 h2 em { font-style: italic; color: var(--gold-light); }
+    #s2 p em { font-style: italic; color: var(--gold-light); }
+    #s2 p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      max-width: 400px;
+    }
+    .relief-card {
+      background: rgba(0,49,83,0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 520px;
+    }
+    .relief-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      background: #001628;
+      filter: sepia(20%);
+      display: block;
+    }
+    .relief-card .card-footer {
+      padding: 0.9rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .card-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .card-text {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink-muted);
+      font-style: italic;
+    }
+
+    #s2 .right-single {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000d1a;
+    }
+    .s2-hero-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      filter: sepia(10%) brightness(0.95);
+      cursor: zoom-in;
+    }
+
+    /* ════════════════════════════════════════
+       SECTION 3 — EL TEMPLETE
+    ════════════════════════════════════════ */
+    #s3 {
+      background: #001628;
+    }
+    #s3 .layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s3 .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      background: linear-gradient(135deg, #001f38 0%, #003153 100%);
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+    }
+    #s3 .info::-webkit-scrollbar { width: 4px; }
+    #s3 .info::-webkit-scrollbar-track { background: transparent; }
+    #s3 .info::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s3 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    #s3 .s3-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 1.4rem;
+    }
+    #s3 h2 em { font-style: italic; color: var(--gold-light); }
+    #s3 p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    /* Columna derecha: dos tarjetas apiladas */
+    #s3 .img-stack {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+    #s3 .img-card {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      cursor: zoom-in;
+    }
+    #s3 .img-card:first-child {
+      border-bottom: 2px solid rgba(201,169,110,0.35);
+    }
+    #s3 .img-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #000d1a;
+      transition: transform 6s ease;
+    }
+    #s3 .img-card:hover img { transform: scale(1.03); }
+    #s3 .img-card .img-caption {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0.7rem 1.2rem;
+      background: linear-gradient(to top, rgba(0,10,25,0.92) 0%, transparent 100%);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.65);
+      font-style: italic;
+      line-height: 1.4;
+    }
+    #s3 .img-card .img-caption em {
+      color: var(--gold-light);
+      font-style: normal;
+      font-weight: 700;
+      display: block;
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .timeline {
+      margin-top: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .tl-item {
+      display: flex;
+      gap: 1.2rem;
+      padding-bottom: 1rem;
+      position: relative;
+    }
+    .tl-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 2.2rem;
+      top: 2rem;
+      bottom: 0;
+      width: 1px;
+      background: rgba(201,169,110,0.2);
+    }
+    .tl-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      min-width: 50px;
+      padding-top: 0.1rem;
+    }
+    .tl-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      background: var(--prussian-dark);
+      margin-top: 0.35rem;
+      flex-shrink: 0;
+    }
+    .tl-text {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      line-height: 1.6;
+    }
+
+    /* ════════════════════════════════════════
+       SECTION 4 — LOS RELIEVES HISTÓRICOS
+    ════════════════════════════════════════ */
+    #s4 {
+      background: #001628;
+    }
+    #s4 .layout {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s4 .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+      background: linear-gradient(135deg, #001f38 0%, #003153 100%);
+    }
+    #s4 .left::-webkit-scrollbar { width: 4px; }
+    #s4 .left::-webkit-scrollbar-track { background: transparent; }
+    #s4 .left::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s4 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      color: var(--white);
+    }
+    #s4 h2 em { font-style: italic; color: var(--gold-light); }
+    #s4 p em { font-style: italic; color: var(--gold-light); }
+    #s4 p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    /* Columna derecha: dos relieves apilados horizontalmente */
+    #s4 .relief-stack {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+    #s4 .relief-item {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      cursor: zoom-in;
+    }
+    #s4 .relief-item:first-child {
+      border-bottom: 2px solid rgba(201,169,110,0.35);
+    }
+    #s4 .relief-item img {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #000d1a;
+      filter: sepia(15%) brightness(0.9);
+      transition: transform 6s ease;
+    }
+    #s4 .relief-item:hover img { transform: scale(1.03); }
+    #s4 .relief-item .relief-label {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 0.65rem 1.2rem;
+      background: linear-gradient(to top, rgba(0,10,25,0.93) 0%, transparent 100%);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    #s4 .relief-item .relief-label .r-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    #s4 .relief-item .relief-label span {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.8rem;
+      font-style: italic;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+    }
+
+    /* ════════════════════════════════════════
+       SECTION 5 — LAS DIFICULTADES / ALBERDI
+    ════════════════════════════════════════ */
+    #s5 {
+      background: var(--prussian);
+    }
+    #s5 .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s5 .text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+    }
+    #s5 .text-col::-webkit-scrollbar { width: 4px; }
+    #s5 .text-col::-webkit-scrollbar-track { background: transparent; }
+    #s5 .text-col::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s5 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+    #s5 .s5-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 1.4rem;
+    }
+    #s5 h2 em { font-style: italic; color: var(--gold-light); }
+    #s5 p em  { font-style: italic; color: var(--gold-light); }
+    #s5 p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    #s5 .s5-quote {
+      margin-top: 0.5rem;
+      padding: 1rem 1.2rem 1rem 1.5rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.05);
+    }
+    #s5 .s5-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.88rem;
+      color: var(--cream);
+      line-height: 1.6;
+      margin: 0;
+    }
+    /* Columna derecha: imagen única a pantalla completa */
+    #s5 .img-sole {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000d1a;
+    }
+    #s5 .img-sole img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      filter: sepia(15%) brightness(0.9);
+      transition: transform 8s ease;
+      cursor: zoom-in;
+    }
+    #s5 .img-sole:hover img { transform: scale(1.03); }
+
+    /* ════════════════════════════════════════
+       SECTION 6 — LEGADO / CIERRE
+    ════════════════════════════════════════ */
+    #s6 {
+      background: var(--prussian-dark);
+    }
+    #s6 .bg-img {
+      position: absolute; inset: 0;
+      background: url('templete6.png') center/cover no-repeat;
+      opacity: 0.20;
+    }
+    /* ════════════════════════════════════════
+       SECTION 6 — SIMBOLOGÍA DE LA OBRA
+    ════════════════════════════════════════ */
+    #s6 {
+      background: #001628;
+    }
+    #s6 .layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s6 .text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+      background: linear-gradient(135deg, #001f38 0%, #003153 100%);
+    }
+    #s6 .text-col::-webkit-scrollbar { width: 4px; }
+    #s6 .text-col::-webkit-scrollbar-track { background: transparent; }
+    #s6 .text-col::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s6 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.3rem;
+    }
+    #s6 h2 em { font-style: italic; color: var(--gold-light); }
+    #s6 p {
+      font-size: 0.84rem;
+      line-height: 1.78;
+      color: var(--ink-muted);
+      margin-bottom: 0.9rem;
+    }
+    #s6 p em { font-style: italic; color: var(--gold-light); }
+    #s6 .img-sole {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000d1a;
+    }
+    #s6 .img-sole img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      filter: brightness(0.92);
+      transition: transform 8s ease;
+      cursor: zoom-in;
+    }
+    #s6 .img-sole:hover img { transform: scale(1.03); }
+
+    /* ════════════════════════════════════════
+       SECTION 7 — LA LIBERTAD Y SU UBICACIÓN
+    ════════════════════════════════════════ */
+    #s7 {
+      background: var(--prussian-dark);
+    }
+    #s7 .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 100%;
+      height: 100%;
+    }
+    #s7 .text-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 2.5rem 2.5rem 2.5rem 4rem;
+      overflow-y: auto;
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(201,169,110,0.3) transparent;
+      background: linear-gradient(135deg, #001f38 0%, #003153 100%);
+    }
+    #s7 .text-col::-webkit-scrollbar { width: 4px; }
+    #s7 .text-col::-webkit-scrollbar-track { background: transparent; }
+    #s7 .text-col::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+    #s7 h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+    #s7 h2 em { font-style: italic; color: var(--gold-light); }
+    #s7 .s7-debate {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.7rem;
+      font-weight: 700;
+    }
+    #s7 p {
+      font-size: 0.86rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+    #s7 p em { font-style: italic; color: var(--gold-light); }
+    #s7 .s7-quote-block {
+      margin: 0.5rem 0 1rem;
+      padding: 1rem 1.2rem 1rem 1.5rem;
+      border-left: 3px solid var(--gold);
+      background: rgba(201,169,110,0.05);
+    }
+    #s7 .s7-quote-block p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.86rem;
+      color: var(--cream);
+      line-height: 1.65;
+      margin: 0 0 0.6rem;
+    }
+    #s7 .s7-quote-block p:last-child { margin-bottom: 0; }
+    #s7 .s7-quote-attrib {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-top: 0.2rem;
+    }
+    #s7 .fin {
+      font-size: 0.62rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid rgba(201,169,110,0.15);
+    }
+    #s7 .img-sole {
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000d1a;
+    }
+    #s7 .img-sole img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      filter: sepia(15%) brightness(0.9);
+      transition: transform 8s ease;
+      cursor: zoom-in;
+    }
+    #s7 .img-sole:hover img { transform: scale(1.03); }
+
+    /* ───── ANIMATIONS ───── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounceX {
+      0%, 100% { transform: translateX(0); }
+      50%       { transform: translateX(6px); }
+    }
+
+    /* ───── SECTION ENTER ANIMATIONS ───── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.15s; }
+    .reveal-delay-2 { transition-delay: 0.3s; }
+    .reveal-delay-3 { transition-delay: 0.45s; }
+    .reveal-delay-4 { transition-delay: 0.6s; }
+
+    /* ───── CORNER DECO ───── */
+    .corner-deco {
+      position: absolute;
+      width: 60px; height: 60px;
+    }
+    .corner-deco svg { width: 100%; height: 100%; stroke: var(--gold); fill: none; stroke-width: 1; opacity: 0.4; }
+    .corner-tl { top: 1.5rem; left: 1.5rem; }
+    .corner-tr { top: 1.5rem; right: 1.5rem; transform: rotate(90deg); }
+    .corner-bl { bottom: 1.5rem; left: 1.5rem; transform: rotate(-90deg); }
+    .corner-br { bottom: 1.5rem; right: 1.5rem; transform: rotate(180deg); }
+
+    .version-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.6rem;
+    }
+    .version-block {
+      padding: 0.85rem 1.1rem;
+      border-left: 2px solid rgba(201,169,110,0.3);
+      background: rgba(255,255,255,0.03);
+    }
+    .version-block p {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--ink-muted);
+      margin: 0.35rem 0 0;
+    }
+    .version-block p em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+    .version-tag {
+      display: inline-block;
+      font-size: 0.56rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 0.18rem 0.55rem;
+      border-radius: 2px;
+    }
+    .version-tag.tucumana {
+      background: rgba(0,80,140,0.5);
+      color: #a8d4f5;
+      border: 1px solid rgba(100,180,255,0.25);
+    }
+    .version-tag.saltena {
+      background: rgba(120,60,0,0.4);
+      color: #f5c87a;
+      border: 1px solid rgba(201,169,110,0.3);
+    }
+
+    /* Asegura que el label inicial sea visible en tablet */
+    #s1 .text-side > *:first-child,
+    #s2 .left > *:first-child,
+    #s3 .info > *:first-child,
+    #s4 .left > *:first-child,
+    #s5 .text-col > *:first-child,
+    #s6 .text-col > *:first-child,
+    #s7 .text-col > *:first-child {
+      margin-top: 1.5rem;
+    }
+
+    /* ───── LIGHTBOX ───── */
+    img.zoomable {
+      cursor: zoom-in;
+    }
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(0, 10, 20, 0.95);
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(6px);
+      animation: lbFadeIn 0.25s ease;
+    }
+    #lightbox.open {
+      display: flex;
+    }
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      border: 1px solid rgba(201,169,110,0.3);
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+      animation: lbZoomIn 0.3s ease;
+    }
+    #lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 44px; height: 44px;
+      border: 1px solid rgba(201,169,110,0.5);
+      border-radius: 50%;
+      background: rgba(0,20,40,0.8);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    #lightbox-close:hover { border-color: var(--gold); background: rgba(0,20,40,1); }
+    #lightbox-close svg { width: 18px; height: 18px; stroke: var(--gold); fill: none; stroke-width: 2; }
+    #lightbox-caption {
+      position: fixed;
+      bottom: 1.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      z-index: 1000;
+    }
+    @keyframes lbFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes lbZoomIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to   { transform: scale(1);    opacity: 1; }
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <div id="lightbox-close"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+  <img id="lightbox-img" src="" alt="" />
+  <div id="lightbox-caption"></div>
+</div>
+
+<!-- NAV DOTS -->
+<div id="nav-dots">
+  <div class="dot active" data-idx="0"></div>
+  <div class="dot" data-idx="1"></div>
+  <div class="dot" data-idx="2"></div>
+  <div class="dot" data-idx="3"></div>
+  <div class="dot" data-idx="4"></div>
+  <div class="dot" data-idx="5"></div>
+  <div class="dot" data-idx="6"></div>
+  <div class="dot" data-idx="7"></div>
+</div>
+
+<!-- ARROWS -->
+<div class="arrow" id="arrow-prev">
+  <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+</div>
+<div class="arrow" id="arrow-next">
+  <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+</div>
+
+<!-- TRACK -->
+<div id="track">
+
+  <!-- ══ SECTION 0: PORTADA ══ -->
+  <section id="s0">
+    <div class="bg-img"></div>
+    <div class="gradient-overlay"></div>
+    <!-- corner decorations -->
+    <div class="corner-deco corner-tl"><svg viewBox="0 0 60 60"><path d="M2 58 L2 2 L58 2"/></svg></div>
+    <div class="corner-deco corner-tr"><svg viewBox="0 0 60 60"><path d="M2 58 L2 2 L58 2"/></svg></div>
+    <div class="corner-deco corner-bl"><svg viewBox="0 0 60 60"><path d="M2 58 L2 2 L58 2"/></svg></div>
+    <div class="corner-deco corner-br"><svg viewBox="0 0 60 60"><path d="M2 58 L2 2 L58 2"/></svg></div>
+
+    <div class="content">
+      <p class="eyebrow">Museo Casa Histórica de la Independencia · Tucumán, Argentina</p>
+      <h1>Lola <em>Mora</em></h1>
+      <p class="subtitle">La primera gran escultora de Argentina</p>
+      <p class="dates">1866 &ensp;—&ensp; 1936</p>
+      <div class="scroll-hint">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+        <span>Deslizá para explorar</span>
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 1: RETRATO ══ -->
+  <section id="s1">
+    <div class="split">
+      <div class="photo-side">
+        <img src="52607-A.jpg" alt="Retrato de Lola Mora" class="zoomable" />
+        <div class="year-tag">1900</div>
+      </div>
+      <div class="text-side">
+        <p class="section-label reveal">I · Origen</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">La <em>rebelión</em><br>del mármol</h2>
+        <p class="reveal reveal-delay-2">
+          La historia del nacimiento de Lola Mora es objeto de permanente debate entre historiadores tucumanos y salteños. El único documento fehaciente es una partida bautismal del Libro XI de la parroquia de Trancas, fechada el 22 de junio de 1867, que registra a <em>"Dolores de edad de dos meses, hija legítima de Don Romualdo Mora y de Doña Regina Vega"</em>.
+        </p>
+        <div class="version-row reveal reveal-delay-3">
+          <div class="version-block">
+            <span class="version-tag tucumana">La versión tucumana</span>
+            <p>Basada en el acta bautismal de Trancas y los testimonios de la propia Lola, quien declaró explícitamente ser <em>"nacida en Tucumán"</em> en documentos oficiales como su acta de matrimonio. Los historiadores Carlos Páez de la Torre y Celia Terán sostienen que nació el 22 de abril de 1867.</p>
+          </div>
+          <div class="version-block">
+            <span class="version-tag saltena">La versión salteña</span>
+            <p>En 1969, María Luisa Castiñeira de Campanella afirmó que Lola habría nacido en la estancia <em>"El Dátil"</em>, en la localidad salteña de El Tala, posiblemente el 17 de noviembre de 1866. Esta versión contradice el documento parroquial, considerado más contundente por los biógrafos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 2: OBRAS EN TUCUMÁN ══ -->
+  <section id="s2">
+    <div class="bg-full"></div>
+    <div class="panel">
+      <div class="left">
+        <p class="section-label reveal">II · Obras en Tucumán</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">Las obras en <em>Tucumán</em></h2>
+        <p class="reveal reveal-delay-2">
+          Al poco tiempo de inaugurar la fuente de Las Nereidas en Buenos Aires, Lola Mora viajó a Tucumán para comenzar proyectos monumentales: los murales para la Casa Histórica y las estatuas de <em>"La Libertad"</em> y de Juan Bautista Alberdi. El ministro de Obras Públicas, Emilio Civit, ya había ordenado suministrarle todos los elementos necesarios.
+        </p>
+      </div>
+      <div class="right-single">
+        <img src="Finales-07.png" alt="Fachada del Templete. A la izquierda, uno de los murales de Lola Mora, 1904" class="zoomable s2-hero-img" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 3: EL TEMPLETE ══ -->
+  <section id="s3">
+    <div class="layout">
+
+      <div class="info">
+        <p class="section-label reveal">III · El Templete</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <p class="s3-subtitle reveal reveal-delay-1">La fachada de 1904</p>
+        <h2 class="reveal reveal-delay-2">El <em>Templete</em></h2>
+        <p class="reveal reveal-delay-3">
+          Edificio de estilo francés construido durante la presencia de Julio Argentino Roca para reemplazar el edificio del Correo. Los murales y la estatua de la Libertad encargados a la escultora Lola Mora, serían colocados en el patio diseñado por Charles Thays, que funcionaba como acceso al Templete.
+        </p>
+      </div>
+
+      <div class="img-stack">
+        <div class="img-card">
+          <img src="templete2.png" alt="Descubrí cómo se hubiera visto la estatua de la Libertad colocada en el Templete" class="zoomable" />
+          <div class="img-caption">
+            <em>Reconstrucción virtual</em>
+            Descubrí cómo se hubiera visto la estatua de la Libertad colocada en el Templete, para donde fue pensada originalmente por Lola Mora.
+          </div>
+        </div>
+        <div class="img-card">
+          <img src="templete6.png" alt="Perspectiva del conjunto escultórico original" class="zoomable" />
+          <div class="img-caption">
+            <em>Vista aérea</em>
+            Perspectiva del conjunto escultórico original.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SECTION 4: LOS RELIEVES HISTÓRICOS ══ -->
+  <section id="s4">
+    <div class="layout">
+      <div class="left">
+        <p class="section-label reveal">IV · Los Relieves</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">Los relieves <em>históricos</em></h2>
+        <p class="reveal reveal-delay-2">
+          Los dos grandes bajorrelieves de bronce que flanquean el patio de la Casa Histórica constituyen una narración visual de la epopeya argentina. El primero, titulado <em>'25 de Mayo de 1810'</em>, captura la tensión y la euforia del pueblo en la Plaza de la Victoria, con figuras que parecen moverse hacia el espectador reclamando su destino.
+        </p>
+        <p class="reveal reveal-delay-3">
+          El segundo, <em>'9 de Julio de 1816'</em>, inmortaliza el momento solemne de la jura de la Independencia, destacando la dignidad de los congresales y la participación del pueblo en este acto fundacional.
+        </p>
+        <p class="reveal reveal-delay-4">
+          Lola Mora logró en estas obras una profundidad de campo y un dinamismo inusuales para la época. A diferencia de las representaciones estáticas tradicionales, sus relieves están llenos de vida, gestos apasionados y detalles indumentarios que reflejan una meticulosa investigación histórica combinada con su inconfundible estilo romántico y expresivo.
+        </p>
+      </div>
+
+      <div class="relief-stack">
+        <div class="relief-item">
+          <img src="0239.png" alt="25 de Mayo de 1810 — Relieve de Lola Mora, Casa Histórica de Tucumán" class="zoomable" />
+          <div class="relief-label">
+            <div class="r-dot"></div>
+            <span>25 de Mayo de 1810</span>
+          </div>
+        </div>
+        <div class="relief-item">
+          <img src="001.jpg" alt="9 de Julio de 1816 — Relieve de Lola Mora, Casa Histórica de Tucumán" class="zoomable" />
+          <div class="relief-label">
+            <div class="r-dot"></div>
+            <span>9 de Julio de 1816</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SECTION 5: LAS DIFICULTADES ══ -->
+  <section id="s5">
+    <div class="layout">
+      <div class="text-col">
+        <p class="section-label reveal">V · Monumento a Alberdi</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">Las <em>dificultades</em></h2>
+        <p class="s5-subtitle reveal reveal-delay-2">Con el monumento a Alberdi</p>
+        <p class="reveal reveal-delay-2">
+          El monumento sorteó varias dificultades económicas. Lola expresó públicamente:
+        </p>
+        <div class="s5-quote reveal reveal-delay-3">
+          <p>"No podría concebir la posibilidad de un monumento como el del doctor Alberdi pueda costar sólo 30.000 pesos, sino se considera el desprendimiento del trabajo personal y artístico del autor."</p>
+        </div>
+        <p class="reveal reveal-delay-4">
+          A pesar de los reclamos, Lola trabajó durante dos años y medio <em>"con grandes sacrificios pecuniarios"</em>. El gobierno nacional finalmente dispuso fondos adicionales, y gran parte del costo fue aportado por vecinos tucumanos.
+        </p>
+      </div>
+      <div class="img-sole">
+        <img src="fa2724d8-5d85-4bd6-93a3-75edc7155011.jpg"
+             alt="Estatua de Alberdi en Tucumán, obra de la escultora tucumana Lola Mora"
+             class="zoomable" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 6: LA LIBERTAD Y SU UBICACIÓN ══ -->
+  <section id="s6">
+    <div class="layout">
+      <div class="text-col">
+        <p class="section-label reveal">VI · Logros monumentales</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">La <em>Libertad</em> y su ubicación</h2>
+
+        <p class="s7-debate reveal reveal-delay-2">El debate sobre la Libertad</p>
+        <p class="reveal reveal-delay-2">
+          Lola se empeñó en corregir la ubicación, logrando que se colocara en el centro de la Plaza Independencia. Surgieron opiniones sobre su orientación: ¿hacia el Poniente (Cabildo y montaña) o hacia el Este (sol naciente y Río Salí)?
+        </p>
+
+        <div class="s7-quote-block reveal reveal-delay-3">
+          <p>"Si el general Mitre es una autoridad como historiador, yo también creo tener derecho de opinar como artista."</p>
+          <span class="s7-quote-attrib">— Lola Mora</span>
+        </div>
+        <p class="reveal reveal-delay-3">
+          Bartolomé Mitre opinó que debía mirar al Oriente, <em>"hacia el sol naciente de la libertad"</em>. La escultura se emplazó finalmente como ella quería.
+        </p>
+
+        <p class="fin reveal reveal-delay-4">Museo Casa Histórica de la Independencia · San Miguel de Tucumán</p>
+      </div>
+
+      <div class="img-sole">
+        <img src="image.png"
+             alt="Estatua de La Libertad en la Plaza Independencia de Tucumán, obra de Lola Mora"
+             class="zoomable" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 7: SIMBOLOGÍA DE LA OBRA ══ -->
+  <section id="s7">
+    <div class="layout">
+      <div class="text-col">
+        <p class="section-label reveal">VII · La estatua de la Libertad</p>
+        <span class="gold-line reveal reveal-delay-1"></span>
+        <h2 class="reveal reveal-delay-1">Simbología de <em>la obra</em></h2>
+        <p class="reveal reveal-delay-2">
+          La estatua de la libertad es una alegoría. Se erige sobre un pedestal arquitectónico, muy sobrio, despojado de figuras y resuelto en una materialidad contrastante con el de la figura femenina central.
+        </p>
+        <p class="reveal reveal-delay-2">
+          El cuerpo de mujer esculpido en <em>mármol de Carrara</em> revela una fuerte anatomía el cual se encuentra levemente cubierto por un ropaje adherido al cuerpo con un tratamiento de paños mojados y que vuela al viento. Al fuerte movimiento corporal lo acentúa con la cabellera revuelta y solapada hacia atrás que en actitud decidida y desafiante avanza contra el viento, sosteniendo en su cabeza un <em>gorro frigio</em>.
+        </p>
+        <p class="reveal reveal-delay-3">
+          La fuerza de la escultura se dirige en una única dirección al frente mirando al oeste, erigiéndose cual astro de la moral y civilización de los pueblos. Deja entrever determinación y temple tal como la que los hombres de la independencia ostentaron al momento de dar el gran paso hacia la liberación.
+        </p>
+        <p class="reveal reveal-delay-3">
+          La libertad es una mujer que con gesto decidido y sereno va rompiendo vientos y cortando las cadenas del yugo colonial. A los pies de la alegoría apuntalando la propuesta temática una <em>espada de puño retorcido</em>, cadenas rotas, unos grilletes, un cañón y un fusil — símbolos de las luchas libradas que consolidaron el grito de independencia.
+        </p>
+      </div>
+      <div class="img-sole">
+        <img src="IMG-3714.jpg"
+             alt="Detalle escultórico — cadenas y símbolos a los pies de La Libertad, Lola Mora"
+             class="zoomable" />
+      </div>
+    </div>
+  </section>
+
+</div><!-- /track -->
+
+<script>
+  const track = document.getElementById('track');
+  const sections = document.querySelectorAll('section');
+  const dots = document.querySelectorAll('.dot');
+  const N = sections.length;
+  let current = 0;
+  let isAnimating = false;
+
+  function goTo(idx) {
+    if (isAnimating) return;
+    // Circular navigation
+    if (idx < 0) idx = N - 1;
+    if (idx >= N) idx = 0;
+    isAnimating = true;
+    current = idx;
+    sections[idx].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    // trigger reveals in this section
+    triggerReveals(sections[idx]);
+    setTimeout(() => { isAnimating = false; }, 700);
+  }
+
+  function triggerReveals(section) {
+    section.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }
+
+  // Trigger first section immediately
+  triggerReveals(sections[0]);
+
+  // Dots
+  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.idx)));
+
+  // Arrows
+  document.getElementById('arrow-prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('arrow-next').addEventListener('click', () => goTo(current + 1));
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(current + 1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(current - 1);
+  });
+
+  // Touch / swipe
+  let startX = null;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    if (startX === null) return;
+    const dx = startX - e.changedTouches[0].clientX;
+    if (Math.abs(dx) > 50) { dx > 0 ? goTo(current + 1) : goTo(current - 1); }
+    startX = null;
+  });
+
+  // Wheel
+  let wheelCooldown = false;
+  window.addEventListener('wheel', e => {
+    if (wheelCooldown) return;
+    wheelCooldown = true;
+    e.deltaY > 0 || e.deltaX > 0 ? goTo(current + 1) : goTo(current - 1);
+    setTimeout(() => { wheelCooldown = false; }, 800);
+  }, { passive: true });
+
+  // ── LIGHTBOX ──
+  const lightbox     = document.getElementById('lightbox');
+  const lbImg        = document.getElementById('lightbox-img');
+  const lbCaption    = document.getElementById('lightbox-caption');
+  const lbClose      = document.getElementById('lightbox-close');
+
+  function openLightbox(src, alt) {
+    lbImg.src = src;
+    lbImg.alt = alt;
+    lbCaption.textContent = alt;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lbImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('img.zoomable').forEach(img => {
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = Array.from(sections).indexOf(entry.target);
+        current = idx;
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+        triggerReveals(entry.target);
+      }
+    });
+  }, { threshold: 0.5, root: track });
+
+  sections.forEach(s => observer.observe(s));
+
+  // ══════════════════════════════════════════
+  // MODO KIOSKO — PANTALLA COMPLETA
+  // ══════════════════════════════════════════
+
+  // Solicitar pantalla completa al primer toque del visitante
+  function requestFullscreen() {
+    const el = document.documentElement;
+    if (el.requestFullscreen)            el.requestFullscreen();
+    else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    else if (el.mozRequestFullScreen)    el.mozRequestFullScreen();
+    else if (el.msRequestFullscreen)     el.msRequestFullscreen();
+  }
+
+  // Intentar fullscreen al cargar
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(requestFullscreen, 500);
+  });
+
+  // Re-activar fullscreen si el visitante lo cierra accidentalmente
+  document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+      setTimeout(requestFullscreen, 800);
+    }
+  });
+  document.addEventListener('webkitfullscreenchange', () => {
+    if (!document.webkitFullscreenElement) {
+      setTimeout(requestFullscreen, 800);
+    }
+  });
+
+  // Activar fullscreen también al primer toque (necesario en Android)
+  document.addEventListener('touchstart', requestFullscreen, { once: true });
+  document.addEventListener('click',      requestFullscreen, { once: true });
+
+  // Bloquear botón "atrás" del navegador
+  history.pushState(null, null, location.href);
+  window.addEventListener('popstate', () => {
+    history.pushState(null, null, location.href);
+  });
+
+  // Prevenir zoom con doble toque y pellizco
+  document.addEventListener('touchstart', (e) => {
+    if (e.touches.length > 1) e.preventDefault();
+  }, { passive: false });
+
+  let lastTap = 0;
+  document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTap < 300) e.preventDefault();
+    lastTap = now;
+  }, { passive: false });
+
+  // Prevenir menú contextual (pulsación larga)
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Prevenir selección de texto
+  document.addEventListener('selectstart', e => e.preventDefault());
+
+</script>
+</body>
+</html>
